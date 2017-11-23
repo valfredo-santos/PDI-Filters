@@ -24,7 +24,14 @@ int main(int argc, char** argv){
         return -1;
     }
 
-    cifilters::Negative(image);
+    Mat sharpen = (Mat_<float>(3, 3) <<
+    0, -1, 0,
+    -1, 5, -1,
+    0, -1, 0);
+
+    //cifilters::Negative(image);
+    cifilters::ApplyKernel(image, sharpen);
+
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela
     imshow("Display Window", image);                        //mostra imagem na janela

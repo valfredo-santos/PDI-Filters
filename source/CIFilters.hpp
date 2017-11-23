@@ -10,4 +10,6 @@ namespace cifilters{
     void Gray(cv::Mat img);
     void Negative(cv::Mat img);
 
+
+    void ApplyKernel(cv::Mat& image, cv::Mat kernel);
 }

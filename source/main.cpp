@@ -1,11 +1,6 @@
-
 #include "CIFilters.hpp"
-
-
 #include <iostream>
 #include <string>
-
-
 
 int main(int argc, char** argv){
     using namespace cv;

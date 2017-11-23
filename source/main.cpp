@@ -24,7 +24,7 @@ int main(int argc, char** argv){
         return -1;
     }
 
-    cifilters::Gray(image);
+    cifilters::Negative(image);
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela
     imshow("Display Window", image);                        //mostra imagem na janela

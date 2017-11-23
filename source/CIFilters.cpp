@@ -21,6 +21,16 @@ void Gray(cv::Mat img){
 	}
 }
 
+void Negative(cv::Mat img){
+	/*segue a formula negativo = 255 - valor do pixel*/
+	for (int n = 0; n < img.rows; n++) {
+		for (int m = 0; m < img.cols; m++) {
+			img.at<cv::Vec3b>(n, m)[0] = 255 - img.at<cv::Vec3b>(n, m)[0];
+			img.at<cv::Vec3b>(n, m)[1] = 255 - img.at<cv::Vec3b>(n, m)[1];
+			img.at<cv::Vec3b>(n, m)[2] = 255 - img.at<cv::Vec3b>(n, m)[2];
+		}
+	}
+}
 
 
 }

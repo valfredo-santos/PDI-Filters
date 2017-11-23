@@ -8,5 +8,6 @@ namespace cifilters{
 
 
     void Gray(cv::Mat img);
+    void Negative(cv::Mat img);
 
 }

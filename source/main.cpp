@@ -1,7 +1,7 @@
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/highgui.hpp>
+#include "CIFilters.hpp"
+
+
 #include <iostream>
 #include <string>
 
@@ -21,6 +21,8 @@ int main(int argc, char** argv){
         cout << "Não foi possível abrir imagem" << endl;
         return -1;
     }
+
+    Gray(image);
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela
     imshow("Display Window", image);                        //mostra imagem na janela

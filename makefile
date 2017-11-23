@@ -15,7 +15,7 @@ OBJECTS = $(patsubst $(SDIR)/%,$(BDIR)/%,$(_OBJECTS))
 
 #CXX = g++
 
-CXXFLAGS = -Wall -Wpedantic -std=c++14 'pkg-config --cflags --libs opencv'
+CXXFLAGS = -Wall -Wpedantic -std=c++14 
 
 ifeq ($(DEBUG), 1)
 	CXXFLAGS += -O0 -g3
@@ -24,10 +24,10 @@ else
 endif
 
 $(BDIR)/%.o : $(SDIR)/%.cpp $(DEPENDENCIES)
-	$(CXX) $(CXXFLAGS) -c $< -o $@  
+	$(CXX) $(CXXFLAGS) -c $< -o $@  `pkg-config --cflags --libs opencv`
 
 $(EXECUTABLE) : $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@  `pkg-config --cflags --libs opencv`
 
 .PHONY : cleanobj clean
 

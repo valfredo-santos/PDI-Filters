@@ -4,4 +4,9 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-//void Gray(Mat img);
+namespace cifilters{
+
+
+    void Gray(cv::Mat img);
+
+}

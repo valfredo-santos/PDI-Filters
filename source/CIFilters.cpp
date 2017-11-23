@@ -1,7 +1,9 @@
 #include "CIFilters.hpp"
 
+namespace cifilters{
 
-void Gray(Mat img){
+
+void Gray(cv::Mat img){
     
 	float media;
 	int r, g, b;
@@ -17,4 +19,8 @@ void Gray(Mat img){
 			img.at<cv::Vec3b>(n, m)[2] = (int)media;
 		}
 	}
+}
+
+
+
 }

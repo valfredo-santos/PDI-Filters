@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+
+
 int main(int argc, char** argv){
     using namespace cv;
     using namespace std;
@@ -22,7 +24,7 @@ int main(int argc, char** argv){
         return -1;
     }
 
-    Gray(image);
+    cifilters::Gray(image);
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela
     imshow("Display Window", image);                        //mostra imagem na janela

@@ -24,9 +24,15 @@ int main(int argc, char** argv){
     -1, 5, -1,
     0, -1, 0);
 
+    Mat emboss = (Mat_<float>(3, 3) <<
+    -2, -1, 0,
+    -1, 1, 1,
+    0,  1, 2);
+
     //cifilters::Negative(image);
     //cifilters::ApplyKernel(image, sharpen);
-    cifilters::multiBrighten(image, 1.5);
+    cifilters::ApplyKernel(image, emboss);
+    cifilters::multiBrighten(image, 1.3);
     cifilters::ApplyKernel(image, sharpen);
 
 

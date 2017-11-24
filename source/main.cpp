@@ -30,10 +30,10 @@ int main(int argc, char** argv){
     0,  1, 2);
 
     //cifilters::Negative(image);
-    //cifilters::ApplyKernel(image, sharpen);
-    cifilters::ApplyKernel(image, emboss);
-    cifilters::multiBrighten(image, 1.3);
     cifilters::ApplyKernel(image, sharpen);
+    //cifilters::ApplyKernel(image, emboss);
+    //cifilters::multiBrighten(image, 1.3);
+    //cifilters::ApplyKernel(image, sharpen);
 
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela

@@ -1,3 +1,6 @@
+#ifndef CIFILTERS_HPP
+#define CIFILTERS_HPP
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/highgui.hpp>
@@ -109,3 +112,5 @@ inline void ApplyKernel(cv::Mat & image, cv::Mat kernel){
 }
 
 }
+
+#endif /*CIFILTERS_HPP*/

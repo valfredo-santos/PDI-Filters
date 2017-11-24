@@ -25,6 +25,8 @@ int main(int argc, char** argv){
     0, -1, 0);
 
     //cifilters::Negative(image);
+    //cifilters::ApplyKernel(image, sharpen);
+    cifilters::multiBrighten(image, 1.5);
     cifilters::ApplyKernel(image, sharpen);
 
 

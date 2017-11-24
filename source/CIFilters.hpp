@@ -3,6 +3,7 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
+#include <iostream>
 
 namespace cifilters{
 
@@ -35,18 +36,43 @@ inline void Negative(cv::Mat img){
 	}
 }
 
-inline void ApplyKernel(cv::Mat& image, cv::Mat kernel)
-{
+inline void AdditiveBrighten(cv::Mat & image, const int beta){
+	using namespace cv;	
+	for (int y = 0; y < image.rows; y++){
+		for (int x = 0; x < image.cols; x++){
+			for (int channel = 0; channel < image.channels(); channel++){
+				image.at<Vec3b>(y, x)[channel] = saturate_cast<uchar>(image.at<Vec3b>(y, x)[channel] + beta);
+			}
+		}
+	}
+}
+
+inline void multiBrighten(cv::Mat & image, const float c){
+	using namespace cv;
+	if (c < 0){
+		std::cout << "Multiplicative Brighten not applied: The c parameter must be non negative" << std::endl;		
+	}else{
+		for (int y = 0; y < image.rows; y++){
+			for (int x = 0; x < image.cols; x++){
+				for (int channel = 0; channel < image.channels(); channel++){
+					image.at<Vec3b>(y, x)[channel] = saturate_cast<uchar>(image.at<Vec3b>(y, x)[channel] * c);
+				}
+			}
+		}
+	}
+}
+
+inline void ApplyKernel(cv::Mat & image, cv::Mat kernel){
 	using namespace cv;
 
 	int raio = kernel.rows / 2;
 
-	Mat image_final(image.size(), image.type());
+	Mat imageFinal(image.size(), image.type());
 
-	Mat image_border;
-	copyMakeBorder(image, image_border, raio, raio, raio, raio, cv::BORDER_REFLECT101);
+	Mat imageBorder;
+	copyMakeBorder(image, imageBorder, raio, raio, raio, raio, cv::BORDER_REFLECT101);
 
-	Mat image_region;
+	Mat imageRegion;
 
 	int pixel;
 
@@ -59,30 +85,27 @@ inline void ApplyKernel(cv::Mat& image, cv::Mat kernel)
 	}
 	merge(vChannels, mask);
 
-	for (int y = raio; y < image_border.rows - raio; y++)
-	{
-		for (int x = raio; x < image_border.cols - raio; x++)
-		{
-			for (int c = 0; c < image.channels(); c++)
-			{
+	for (int y = raio; y < imageBorder.rows - raio; y++){
+		for (int x = raio; x < imageBorder.cols - raio; x++){
+			for (int c = 0; c < image.channels(); c++){
 				Rect region(x - raio, y - raio, kernel.rows, kernel.cols);
-				image_region = image_border(region);
+				imageRegion = imageBorder(region);
 
-				image_region.convertTo(image_region, CV_32FC3);
+				imageRegion.convertTo(imageRegion, CV_32FC3);
 
-				image_region = image_region.mul(mask);
+				imageRegion = imageRegion.mul(mask);
 
-				pixel = sum(image_region)[c];
+				pixel = sum(imageRegion)[c];
 
 				if (pixel > 255)	pixel = 255;
 				if (pixel < 0)		pixel = 0;
 
-				image_final.at<Vec3b>(y - raio, x - raio)[c] = pixel;
+				imageFinal.at<Vec3b>(y - raio, x - raio)[c] = pixel;
 			}
 		}
 	}
 
-	image = image_final;
+	image = imageFinal;
 }
 
 }

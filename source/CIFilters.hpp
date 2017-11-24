@@ -28,6 +28,27 @@ inline void Gray(cv::Mat img){
 	}
 }
 
+inline void GrayCopy(const cv::Mat img, cv::Mat copy){
+	
+	img.copyTo(copy);
+
+	float media;
+	int r, g, b;
+	int n = 0, m = 0;
+	for (n = 0; n < copy.rows; n++) {
+		for (m = 0; m < copy.cols; m++) {
+			b = copy.at<cv::Vec3b>(n, m)[0];
+			g = copy.at<cv::Vec3b>(n, m)[1];
+			r = copy.at<cv::Vec3b>(n, m)[2];
+			media = (b + r + g) / 3;
+			copy.at<cv::Vec3b>(n, m)[0] = (int)media;
+			copy.at<cv::Vec3b>(n, m)[1] = (int)media;
+			copy.at<cv::Vec3b>(n, m)[2] = (int)media;
+		}
+	}
+
+}
+
 inline void Negative(cv::Mat img){
 	/*segue a formula negativo = 255 - valor do pixel*/
 	for (int n = 0; n < img.rows; n++) {

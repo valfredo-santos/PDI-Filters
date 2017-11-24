@@ -29,8 +29,11 @@ int main(int argc, char** argv){
     -1, 1, 1,
     0,  1, 2);
 
+    cv::Mat image2 = image.clone();
+
+    cifilters::GrayCopy(image,image2);
     //cifilters::Negative(image);
-    cifilters::ApplyKernel(image, sharpen);
+    //cifilters::ApplyKernel(image, sharpen);
     //cifilters::ApplyKernel(image, emboss);
     //cifilters::multiBrighten(image, 1.3);
     //cifilters::ApplyKernel(image, sharpen);
@@ -38,6 +41,9 @@ int main(int argc, char** argv){
 
     namedWindow("Display Window", WINDOW_AUTOSIZE);         //cria janela
     imshow("Display Window", image);                        //mostra imagem na janela
+
+    namedWindow("Display Window2", WINDOW_AUTOSIZE);         //cria janela
+    imshow("Display Window2", image2);                        //mostra imagem na janela
 
     waitKey(0);                                             //espera tecla
     return 0;
